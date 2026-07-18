@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prumo — controle de obra sem planilha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FAF9F6;
+    --bg-alt: #F1EEE7;
+    --panel: #FFFFFF;
+    --ink: #1E1B16;
+    --mut: #756E60;
+    --line: #DFDACD;
+    --line-soft: #EAE6DB;
+    --accent: #BF4E24;
+    --accent-ink: #FFFFFF;
+    --blue: #3C5A96;
+    --ok: #3F6B4F;
+    --bad: #A8452B;
+    --radius: 3px;
+    --max: 1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    line-height:1.12;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+  }
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  :focus-visible{outline:2px solid var(--blue); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
+  }
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(250,249,246,0.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:20px;
+    display:flex; align-items:center; gap:9px;
+  }
+  .logo .mark{
+    width:16px; height:16px;
+    border:2px solid var(--ink);
+    position:relative;
+    transform:rotate(45deg);
+  }
+  .logo .mark::after{
+    content:'';
+    position:absolute; left:50%; top:-6px;
+    width:1px; height:6px; background:var(--ink);
+    transform:translateX(-50%);
+  }
+  .btn{
+    font-family:'Inter', sans-serif;
+    font-weight:600; font-size:14.5px;
+    border:none; cursor:pointer;
+    padding:12px 22px;
+    border-radius:var(--radius);
+    display:inline-flex; align-items:center; gap:8px;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary{background:var(--accent); color:var(--accent-ink);}
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 6px 16px rgba(191,78,36,0.28);}
+  .btn-ghost{background:transparent; color:var(--ink); border:1px solid var(--line); padding:11px 20px;}
+  .btn-ghost:hover{border-color:var(--ink);}
+  .nav .btn{padding:10px 18px; font-size:14px;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:88px 0 64px;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 48px 48px;
+    background-position: center -1px;
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 78%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 0%, black 78%, transparent 100%);
+  }
+  .hero-inner{padding-top:0;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px; letter-spacing:0.09em; text-transform:uppercase;
+    color:var(--accent); font-weight:500;
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--accent);}
+  h1.headline{
+    font-size:clamp(34px, 5.2vw, 58px);
+    max-width:16ch;
+    margin-bottom:22px;
+  }
+  .sub{
+    font-size:19px; color:var(--mut);
+    max-width:46ch;
+    margin-bottom:34px;
+  }
+  .hero-ctas{display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin-bottom:64px;}
+  .hero-note{font-size:13.5px; color:var(--mut);}
+
+  /* ---------- mockup panel ---------- */
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:6px;
+    box-shadow:0 24px 60px -30px rgba(30,27,22,0.22);
+    overflow:hidden;
+  }
+  .panel-bar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 20px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .panel-title{font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--mut); letter-spacing:0.04em;}
+  .dots{display:flex; gap:6px;}
+  .dots span{width:8px; height:8px; border-radius:50%; background:var(--line);}
+  .panel-body{padding:28px 30px 22px;}
+  .panel-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:22px; flex-wrap:wrap; gap:8px;}
+  .panel-head h3{font-size:19px;}
+  .panel-head .tag{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--mut);}
+  .bar-row{margin-bottom:16px;}
+  .bar-row .lbl{
+    display:flex; justify-content:space-between;
+    font-size:13.5px; margin-bottom:6px;
+  }
+  .bar-row .lbl .name{color:var(--ink); font-weight:500;}
+  .bar-row .lbl .pct{font-family:'IBM Plex Mono', monospace; font-size:13px;}
+  .bar-track{height:8px; background:var(--bg-alt); border-radius:4px; overflow:hidden;}
+  .bar-fill{height:100%; border-radius:4px;}
+  .flag{
+    margin-top:18px; padding:10px 14px;
+    background:#FBEFE9; border:1px solid #F0D6C8;
+    border-radius:var(--radius);
+    font-size:13px; color:var(--bad);
+    display:flex; gap:8px; align-items:baseline;
+  }
+  .flag .mono{font-size:12px;}
+  .panel-caption{
+    text-align:right; font-size:11px; color:var(--mut);
+    padding:8px 20px 14px; font-family:'IBM Plex Mono', monospace;
+  }
+
+  /* ---------- section shells ---------- */
+  section{padding:88px 0;}
+  .section-alt{background:var(--bg-alt);}
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px; letter-spacing:0.09em; text-transform:uppercase;
+    color:var(--mut); margin-bottom:14px;
+  }
+  h2.section-title{font-size:clamp(26px, 3.4vw, 36px); max-width:22ch; margin-bottom:20px;}
+  .lede{font-size:17.5px; color:var(--mut); max-width:56ch;}
+
+  /* ---------- problem ---------- */
+  .problem{display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px; align-items:start;}
+  .problem-visual{
+    border-left:1px solid var(--line);
+    padding-left:28px;
+  }
+  .problem-visual .row{
+    display:flex; justify-content:space-between;
+    padding:13px 0; border-bottom:1px solid var(--line-soft);
+    font-size:14px;
+  }
+  .problem-visual .row:last-child{border-bottom:none;}
+  .problem-visual .row .k{color:var(--mut);}
+  .problem-visual .row .v{font-family:'IBM Plex Mono', monospace;}
+  .problem-visual .row .v.warn{color:var(--bad);}
+
+  /* ---------- pillars ---------- */
+  .pillars-head{max-width:64ch; margin-bottom:52px;}
+  .pillars{display:grid; grid-template-columns:repeat(3, 1fr); gap:2px; background:var(--line);}
+  .pillar{background:var(--bg); padding:34px 30px 30px;}
+  .pillar .num{font-family:'IBM Plex Mono', monospace; color:var(--accent); font-size:13px; margin-bottom:20px; display:block;}
+  .pillar h3{font-size:19px; margin-bottom:12px;}
+  .pillar p{font-size:14.5px; color:var(--mut); margin:0;}
+
+  /* ---------- proof ---------- */
+  .proof{
+    display:grid; grid-template-columns:auto 1fr; gap:40px; align-items:center;
+  }
+  .proof-mark{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:64px; font-weight:600; color:var(--line);
+    line-height:1;
+  }
+  .proof blockquote{margin:0; font-size:21px; max-width:52ch; font-family:'Space Grotesk', sans-serif; font-weight:500; line-height:1.35;}
+  .proof p.small{margin-top:16px; font-size:14.5px; color:var(--mut); font-family:'Inter', sans-serif; font-weight:400; max-width:52ch;}
+
+  /* ---------- comparison ---------- */
+  table.compare{width:100%; border-collapse:collapse; margin-top:8px;}
+  table.compare th, table.compare td{
+    text-align:left; padding:16px 18px; border-bottom:1px solid var(--line-soft);
+    font-size:14.5px;
+  }
+  table.compare th{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.05em; text-transform:uppercase;
+    color:var(--mut); font-weight:500;
+  }
+  table.compare th:not(:first-child), table.compare td:not(:first-child){text-align:center; width:140px;}
+  table.compare td:first-child{color:var(--ink);}
+  .yes{color:var(--ok); font-weight:600;}
+  .no{color:var(--bad); font-weight:600;}
+  .meh{color:var(--mut);}
+
+  /* ---------- final cta / form ---------- */
+  .cta-final{
+    background:var(--ink); color:var(--bg);
+    border-radius:8px;
+    padding:64px;
+    display:grid; grid-template-columns:1fr 1fr; gap:56px;
+  }
+  .cta-final h2{color:var(--bg); font-size:clamp(26px,3.2vw,34px); max-width:16ch; margin-bottom:16px;}
+  .cta-final .lede{color:#C9C4B7; max-width:38ch;}
+  .cta-final .hero-note{color:#9B9686; margin-top:18px; display:block;}
+  form{display:flex; flex-direction:column; gap:14px;}
+  .field{display:flex; flex-direction:column; gap:6px;}
+  .field label{font-size:12.5px; font-family:'IBM Plex Mono', monospace; color:#B7B2A3;}
+  .field input, .field select{
+    background:#2A2620; border:1px solid #423D33; color:var(--bg);
+    padding:12px 14px; border-radius:var(--radius); font-family:'Inter',sans-serif; font-size:14.5px;
+  }
+  .field input::placeholder{color:#71695A;}
+  .field input:focus, .field select:focus{border-color:var(--accent);}
+  form .btn-primary{margin-top:6px; justify-content:center;}
+  #thanks{display:none; text-align:center; padding:30px 10px;}
+  #thanks h3{color:var(--bg); font-size:20px; margin-bottom:8px;}
+  #thanks p{color:#B7B2A3; font-size:14.5px; margin:0;}
+
+  /* ---------- footer ---------- */
+  footer{padding:40px 0 56px;}
+  .foot-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:28px; border-top:1px solid var(--line-soft);
+    flex-wrap:wrap; gap:12px;
+  }
+  .foot-row .logo{font-size:16px;}
+  .foot-row .tag{font-size:13px; color:var(--mut);}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 860px){
+    .problem{grid-template-columns:1fr; gap:36px;}
+    .problem-visual{border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:24px;}
+    .pillars{grid-template-columns:1fr;}
+    .proof{grid-template-columns:1fr; gap:20px;}
+    .proof-mark{font-size:44px;}
+    .cta-final{grid-template-columns:1fr; padding:40px 26px; border-radius:6px;}
+    table.compare th:not(:first-child), table.compare td:not(:first-child){width:auto;}
+    section{padding:64px 0;}
+    .hero{padding:56px 0 40px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="mark"></span>Prumo</div>
+    <a href="#contato" class="btn btn-primary">Agendar demonstração</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="eyebrow mono">controle de obra</div>
+    <h1 class="headline">Sua obra pode estar sangrando dinheiro sem você ver.</h1>
+    <p class="sub">Prumo junta financeiro, pedidos de material e tarefas da obra em um só lugar — pra você saber exatamente quanto está sobrando antes que seja tarde demais.</p>
+    <div class="hero-ctas">
+      <a href="#contato" class="btn btn-primary">Agendar uma demonstração</a>
+      <a href="#comparativo" class="btn btn-ghost">Ver o que muda</a>
+    </div>
+
+    <div class="panel reveal">
+      <div class="panel-bar">
+        <span class="panel-title">PRUMO — OBRA 01</span>
+        <div class="dots"><span></span><span></span><span></span></div>
+      </div>
+      <div class="panel-body">
+        <div class="panel-head">
+          <h3>Orçado × realizado</h3>
+          <span class="tag mono">atualizado há 4 min</span>
+        </div>
+
+        <div class="bar-row">
+          <div class="lbl"><span class="name">Fundação</span><span class="pct mono">92%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:92%; background:var(--ok);"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="lbl"><span class="name">Estrutura</span><span class="pct mono">78%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:78%; background:var(--blue);"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="lbl"><span class="name">Acabamento</span><span class="pct mono">109%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--bad);"></div></div>
+        </div>
+
+        <div class="flag">
+          <span>⚠</span>
+          <span><strong>Acabamento</strong> passou do orçado essa semana — <span class="mono">+9%</span></span>
+        </div>
+      </div>
+      <div class="panel-caption">interface ilustrativa</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap problem reveal">
+    <div>
+      <div class="kicker">o problema</div>
+      <h2 class="section-title">A planilha não avisa que o dinheiro acabou. Ela só registra depois.</h2>
+      <p class="lede">Entre pedido de material, medição de mão de obra e conta a pagar, é fácil perder o fio de quanto a obra realmente está custando — até o extrato do banco contar a verdade, semanas depois.</p>
+    </div>
+    <div class="problem-visual">
+      <div class="row"><span class="k">Planilha atualizada por</span><span class="v">3 pessoas diferentes</span></div>
+      <div class="row"><span class="k">Última atualização real</span><span class="v warn">12 dias atrás</span></div>
+      <div class="row"><span class="k">Pedido de material sem vínculo com orçamento</span><span class="v warn">sim</span></div>
+      <div class="row"><span class="k">Quem descobre o estouro primeiro</span><span class="v warn">o banco</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="pillars-head reveal">
+      <div class="kicker">como resolve</div>
+      <h2 class="section-title">Uma coisa só: saber pra onde o dinheiro da obra está indo. O resto existe pra sustentar isso.</h2>
+    </div>
+    <div class="pillars reveal">
+      <div class="pillar">
+        <span class="num mono">01</span>
+        <h3>Financeiro</h3>
+        <p>Orçado × realizado por etapa, atualizado conforme a obra anda — não só no fechamento do mês.</p>
+      </div>
+      <div class="pillar">
+        <span class="num mono">02</span>
+        <h3>Pedidos de material</h3>
+        <p>Cada pedido vinculado à etapa e ao orçamento, pra saber o impacto antes de aprovar — não depois.</p>
+      </div>
+      <div class="pillar">
+        <span class="num mono">03</span>
+        <h3>Tarefas</h3>
+        <p>Prazo e responsável por etapa, sem depender de grupo de WhatsApp pra saber o que travou.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap proof reveal">
+    <div class="proof-mark">"</div>
+    <div>
+      <blockquote>Nascido dentro de uma obra real — não numa sala de reunião.</blockquote>
+      <p class="small">Prumo já roda hoje gerenciando o financeiro de uma obra, todos os dias. Não é protótipo de pitch: é a ferramenta que resolveu esse problema pra nós primeiro, antes de qualquer intenção de vender.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt" id="comparativo">
+  <div class="wrap reveal">
+    <div class="kicker">a diferença</div>
+    <h2 class="section-title">Planilha × Prumo</h2>
+    <table class="compare">
+      <thead>
+        <tr><th>&nbsp;</th><th>Planilha</th><th>Prumo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Atualização em tempo real</td><td class="no">✗</td><td class="yes">✓</td></tr>
+        <tr><td>Pedido de material vinculado ao orçamento</td><td class="no">✗</td><td class="yes">✓</td></tr>
+        <tr><td>Alguém sempre com a versão desatualizada</td><td class="no">✓</td><td class="yes">✗</td></tr>
+        <tr><td>Acesso pelo celular, direto do canteiro</td><td class="meh">depende</td><td class="yes">✓</td></tr>
+        <tr><td>Alerta quando uma etapa estoura o orçado</td><td class="no">✗</td><td class="yes">✓</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="wrap">
+    <div class="cta-final reveal">
+      <div>
+        <h2>Quer ver se o Prumo resolve isso na sua obra?</h2>
+        <p class="lede">20 minutos, sem compromisso. A gente mostra o sistema rodando com dados de obra de verdade.</p>
+        <span class="hero-note">Sem cadastro, sem cartão. Só uma conversa.</span>
+      </div>
+
+      <div>
+        <form id="demoForm">
+          <div class="field">
+            <label for="nome">Nome</label>
+            <input id="nome" name="nome" type="text" placeholder="Seu nome" required>
+          </div>
+          <div class="field">
+            <label for="empresa">Construtora / empresa</label>
+            <input id="empresa" name="empresa" type="text" placeholder="Nome da construtora" required>
+          </div>
+          <div class="field">
+            <label for="contato-input">E-mail ou WhatsApp</label>
+            <input id="contato-input" name="contato" type="text" placeholder="voce@empresa.com ou (00) 00000-0000" required>
+          </div>
+          <div class="field">
+            <label for="obras">Obras simultâneas</label>
+            <select id="obras" name="obras">
+              <option value="1">1 obra</option>
+              <option value="2-3">2 a 3 obras</option>
+              <option value="4+">4 ou mais</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Quero uma demonstração</button>
+        </form>
+        <div id="thanks">
+          <h3>Recebemos seu pedido.</h3>
+          <p>Vamos te chamar em breve pra combinar o melhor horário.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div class="logo"><span class="mark"></span>Prumo</div>
+      <span class="tag">Controle de obra sem planilha.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // reveal on scroll
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  els.forEach(el => io.observe(el));
+
+  // form (front-end only — sem backend conectado ainda)
+  const form = document.getElementById('demoForm');
+  const thanks = document.getElementById('thanks');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    form.style.display = 'none';
+    thanks.style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
