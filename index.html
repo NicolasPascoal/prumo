@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prumo — controle de obra sem planilha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="mark"></span>Prumo</div>
+    <a href="#contato" class="btn btn-primary">Agendar demonstração</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="eyebrow mono">controle de obra</div>
+    <h1 class="headline">Sua obra pode estar sangrando dinheiro sem você ver.</h1>
+    <p class="sub">Prumo junta financeiro, pedidos de material e tarefas da obra em um só lugar — pra você saber exatamente quanto está sobrando antes que seja tarde demais.</p>
+    <div class="hero-ctas">
+      <a href="#contato" class="btn btn-primary">Agendar uma demonstração</a>
+      <a href="#comparativo" class="btn btn-ghost">Ver o que muda</a>
+    </div>
+
+    <div class="panel reveal">
+      <div class="panel-bar">
+        <span class="panel-title">PRUMO — OBRA 01</span>
+        <div class="dots"><span></span><span></span><span></span></div>
+      </div>
+      <div class="panel-body">
+        <div class="panel-head">
+          <h3>Orçado × realizado</h3>
+          <span class="tag mono">atualizado há 4 min</span>
+        </div>
+
+        <div class="bar-row">
+          <div class="lbl"><span class="name">Fundação</span><span class="pct mono">92%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:92%; background:var(--ok);"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="lbl"><span class="name">Estrutura</span><span class="pct mono">78%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:78%; background:var(--blue);"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="lbl"><span class="name">Acabamento</span><span class="pct mono">109%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--bad);"></div></div>
+        </div>
+
+        <div class="flag">
+          <span>⚠</span>
+          <span><strong>Acabamento</strong> passou do orçado essa semana — <span class="mono">+9%</span></span>
+        </div>
+      </div>
+      <div class="panel-caption">interface ilustrativa</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap problem reveal">
+    <div>
+      <div class="kicker">o problema</div>
+      <h2 class="section-title">A planilha não avisa que o dinheiro acabou. Ela só registra depois.</h2>
+      <p class="lede">Entre pedido de material, medição de mão de obra e conta a pagar, é fácil perder o fio de quanto a obra realmente está custando — até o extrato do banco contar a verdade, semanas depois.</p>
+    </div>
+    <div class="problem-visual">
+      <div class="row"><span class="k">Planilha atualizada por</span><span class="v">3 pessoas diferentes</span></div>
+      <div class="row"><span class="k">Última atualização real</span><span class="v warn">12 dias atrás</span></div>
+      <div class="row"><span class="k">Pedido de material sem vínculo com orçamento</span><span class="v warn">sim</span></div>
+      <div class="row"><span class="k">Quem descobre o estouro primeiro</span><span class="v warn">o banco</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="pillars-head reveal">
+      <div class="kicker">como resolve</div>
+      <h2 class="section-title">Uma coisa só: saber pra onde o dinheiro da obra está indo. O resto existe pra sustentar isso.</h2>
+    </div>
+    <div class="pillars reveal">
+      <div class="pillar">
+        <span class="num mono">01</span>
+        <h3>Financeiro</h3>
+        <p>Orçado × realizado por etapa, atualizado conforme a obra anda — não só no fechamento do mês.</p>
+      </div>
+      <div class="pillar">
+        <span class="num mono">02</span>
+        <h3>Pedidos de material</h3>
+        <p>Cada pedido vinculado à etapa e ao orçamento, pra saber o impacto antes de aprovar — não depois.</p>
+      </div>
+      <div class="pillar">
+        <span class="num mono">03</span>
+        <h3>Tarefas</h3>
+        <p>Prazo e responsável por etapa, sem depender de grupo de WhatsApp pra saber o que travou.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap proof reveal">
+    <div class="proof-mark">"</div>
+    <div>
+      <blockquote>Nascido dentro de uma obra real — não numa sala de reunião.</blockquote>
+      <p class="small">Prumo já roda hoje gerenciando o financeiro de uma obra, todos os dias. Não é protótipo de pitch: é a ferramenta que resolveu esse problema pra nós primeiro, antes de qualquer intenção de vender.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt" id="comparativo">
+  <div class="wrap reveal">
+    <div class="kicker">a diferença</div>
+    <h2 class="section-title">Planilha × Prumo</h2>
+    <table class="compare">
+      <thead>
+        <tr><th>&nbsp;</th><th>Planilha</th><th>Prumo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Atualização em tempo real</td><td class="no">✗</td><td class="yes">✓</td></tr>
+        <tr><td>Pedido de material vinculado ao orçamento</td><td class="no">✗</td><td class="yes">✓</td></tr>
+        <tr><td>Alguém sempre com a versão desatualizada</td><td class="no">✓</td><td class="yes">✗</td></tr>
+        <tr><td>Acesso pelo celular, direto do canteiro</td><td class="meh">depende</td><td class="yes">✓</td></tr>
+        <tr><td>Alerta quando uma etapa estoura o orçado</td><td class="no">✗</td><td class="yes">✓</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="wrap">
+    <div class="cta-final reveal">
+      <div>
+        <h2>Quer ver se o Prumo resolve isso na sua obra?</h2>
+        <p class="lede">20 minutos, sem compromisso. A gente mostra o sistema rodando com dados de obra de verdade.</p>
+        <span class="hero-note">Sem cadastro, sem cartão. Só uma conversa.</span>
+      </div>
+
+      <div>
+        <form id="demoForm">
+          <div class="field">
+            <label for="nome">Nome</label>
+            <input id="nome" name="nome" type="text" placeholder="Seu nome" required>
+          </div>
+          <div class="field">
+            <label for="empresa">Construtora / empresa</label>
+            <input id="empresa" name="empresa" type="text" placeholder="Nome da construtora" required>
+          </div>
+          <div class="field">
+            <label for="contato-input">E-mail ou WhatsApp</label>
+            <input id="contato-input" name="contato" type="text" placeholder="voce@empresa.com ou (00) 00000-0000" required>
+          </div>
+          <div class="field">
+            <label for="obras">Obras simultâneas</label>
+            <select id="obras" name="obras">
+              <option value="1">1 obra</option>
+              <option value="2-3">2 a 3 obras</option>
+              <option value="4+">4 ou mais</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Quero uma demonstração</button>
+        </form>
+        <div id="thanks">
+          <h3>Recebemos seu pedido.</h3>
+          <p>Vamos te chamar em breve pra combinar o melhor horário.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div class="logo"><span class="mark"></span>Prumo</div>
+      <span class="tag">Controle de obra sem planilha.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
