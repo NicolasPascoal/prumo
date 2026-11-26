@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>gabaro — controle de obra sem planilha</title>
+<title>Gabaro — controle de gastos de obra</title>
+<meta name="description" content="Fotografe a nota e a IA lança o gasto. Orçado × realizado por etapa, fluxo de caixa e a equipe da obra trabalhando junto. Sem planilha.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -11,339 +12,381 @@
 </head>
 <body>
 
+<!--
+  PREENCHER ANTES DE PUBLICAR (procure por "PREENCHER"):
+  - preço de cada plano (R$ —) e o link de checkout da Kiwify de cada um (href="#planos")
+  - leituras de IA por plano: números provisórios até a medição com notas reais
+  - endereço do sistema: https://app.gabaro.com.br (trocar se o domínio for outro)
+-->
+
 <header>
   <div class="wrap nav">
-    <div class="logo"><span class="mark"></span>gabaro</div>
-    <a href="#contato" class="btn btn-primary">Agendar demonstração</a>
+    <a href="#topo" class="logo"><span class="mark"></span>Gabaro</a>
+    <nav class="nav-links">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#ia">Leitura por IA</a>
+      <a href="#planos">Planos</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+    <div class="nav-acoes">
+      <a href="https://app.gabaro.com.br" class="nav-entrar">Entrar</a>
+      <a href="#planos" class="btn btn-primary">Ver planos</a>
+    </div>
   </div>
 </header>
 
+<main id="topo">
+
+<!-- ───────── hero ───────── -->
 <section class="hero">
-  <div class="wrap hero-inner">
-    <div class="eyebrow mono">gestão de obras</div>
-    <h1 class="headline">Toda a operação da sua obra. Sob controle, em um só lugar.</h1>
-    <p class="sub">O gabaro junta financeiro, suprimentos, cronograma e canteiro em tempo real — pra você saber exatamente o que está acontecendo na sua construtora antes que o dinheiro acabe.</p>
-    <div class="hero-ctas">
-      <a href="#contato" class="btn btn-primary">Agendar uma demonstração</a>
-      <a href="#timeline" class="btn btn-ghost">Ver como funciona</a>
+  <div class="wrap hero-grid">
+    <div class="hero-texto">
+      <div class="eyebrow mono">controle de gastos de obra</div>
+      <h1 class="headline">Fotografou a nota, lançou o gasto.</h1>
+      <p class="sub">A IA do Gabaro lê a nota fiscal e preenche fornecedor, data, itens e valores. Você confere, escolhe a etapa da obra e salva. O orçado × realizado e o fluxo de caixa se atualizam na hora.</p>
+      <div class="hero-ctas">
+        <a href="#planos" class="btn btn-primary">Ver planos</a>
+        <a href="#como-funciona" class="btn btn-ghost">Como funciona</a>
+      </div>
+      <ul class="hero-selos mono">
+        <li>sem instalar nada</li>
+        <li>funciona no celular</li>
+        <li>garantia de 7 dias</li>
+      </ul>
     </div>
 
-    <div class="panel reveal">
-      <div class="panel-bar">
-        <span class="panel-title">gabaro — OBRA BELLA VISTA</span>
-        <div class="dots"><span></span><span></span><span></span></div>
-      </div>
-      <div class="panel-body">
-        <!-- New Stats Row -->
-        <div class="db-indicators">
-          <div class="db-ind">
-            <span class="db-ind-lbl">Saúde da Obra</span>
-            <span class="db-ind-val ok">94.2% no Prazo</span>
-          </div>
-          <div class="db-ind">
-            <span class="db-ind-lbl">Orçado × Realizado</span>
-            <span class="db-ind-val">R$ 450k / R$ 284k</span>
-          </div>
-          <div class="db-ind">
-            <span class="db-ind-lbl">Fluxo de Caixa Futuro</span>
-            <span class="db-ind-val">R$ 85.500 (Proj. 30d)</span>
-          </div>
-          <div class="db-ind">
-            <span class="db-ind-lbl">Alertas Ativos</span>
-            <span class="db-ind-val warn">1 Crítico / 2 Avisos</span>
-          </div>
-          <div class="db-ind">
-            <span class="db-ind-lbl">Equipamentos</span>
-            <span class="db-ind-val">8 Ativos / 2 Trânsito</span>
-          </div>
-          <div class="db-ind">
-            <span class="db-ind-lbl">Calendário</span>
-            <span class="db-ind-val">Medição Amanhã 9h</span>
-          </div>
+    <!-- ilustração: nota lida pela IA virando lançamento -->
+    <div class="demo reveal" aria-label="Ilustração: nota fiscal lida pela IA e o lançamento preenchido">
+      <div class="nota">
+        <div class="nota-topo mono">
+          <span>DANFE NFC-e</span><span>nº 004.512</span>
         </div>
+        <div class="nota-forn">Depósito Santa Rita Materiais</div>
+        <div class="nota-data mono">14/11/2026 · Pix</div>
+        <div class="nota-itens mono">
+          <div><span>Cimento CP-II 50kg</span><span>20 × 38,90</span></div>
+          <div><span>Areia média m³</span><span>3 × 140,00</span></div>
+          <div><span>Tijolo baiano 9 furos</span><span>1000 × 0,92</span></div>
+        </div>
+        <div class="nota-total mono"><span>total</span><span>R$ 2.118,00</span></div>
+        <div class="scan" aria-hidden="true"></div>
+      </div>
 
-        <div class="db-divider"></div>
+      <div class="seta mono" aria-hidden="true">lido pela IA <span class="seta-ponta">→</span></div>
 
-        <div class="db-main">
-          <!-- Left side: Orçado x Realizado progress bars -->
-          <div class="db-left">
-            <div class="panel-head">
-              <h3>Orçado × realizado</h3>
-              <span class="tag mono">atualizado há 4 min</span>
-            </div>
-
-            <div class="bar-row">
-              <div class="lbl"><span class="name">Fundação e Estrutura</span><span class="pct mono">92%</span></div>
-              <div class="bar-track"><div class="bar-fill" style="width:92%; background:var(--ok);"></div></div>
-            </div>
-            <div class="bar-row">
-              <div class="lbl"><span class="name">Alvenaria e Fechamento</span><span class="pct mono">78%</span></div>
-              <div class="bar-track"><div class="bar-fill" style="width:78%; background:var(--blue);"></div></div>
-            </div>
-            <div class="bar-row">
-              <div class="lbl"><span class="name">Revestimento e Acabamento</span><span class="pct mono">109%</span></div>
-              <div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--bad);"></div></div>
-            </div>
+      <div class="janela">
+        <div class="janela-barra">
+          <span class="mono">novo lançamento</span>
+          <span class="pill mono">preenchido pela IA</span>
+        </div>
+        <div class="janela-corpo">
+          <div class="campo"><span class="mono">fornecedor</span><b>Depósito Santa Rita Materiais</b></div>
+          <div class="campos-2">
+            <div class="campo"><span class="mono">data</span><b>14/11/2026</b></div>
+            <div class="campo"><span class="mono">forma</span><b>Pix</b></div>
           </div>
-
-          <!-- Right side: Recent Alerts inside Dashboard -->
-          <div class="db-right">
-            <div class="panel-head" style="margin-bottom: 12px;">
-              <h3>Alertas Recentes</h3>
-            </div>
-            <div class="db-alerts-feed">
-              <div class="db-alert critical">
-                <span class="alert-icon">⚠</span>
-                <span>Fundação ultrapassou o orçamento previsto.</span>
-              </div>
-              <div class="db-alert">
-                <span class="alert-icon">⚠</span>
-                <span>Conta da concreteira vence amanhã (R$ 12.000).</span>
-              </div>
-            </div>
+          <div class="campos-2">
+            <div class="campo campo-voce"><span class="mono">categoria</span><b>Alvenaria e vedação</b></div>
+            <div class="campo campo-voce"><span class="mono">tipo de despesa</span><b>Material</b></div>
+          </div>
+          <div class="linhas mono">
+            <div><span>Cimento CP-II 50kg</span><span>R$ 778,00</span></div>
+            <div><span>Areia média m³</span><span>R$ 420,00</span></div>
+            <div><span>Tijolo baiano 9 furos</span><span>R$ 920,00</span></div>
+          </div>
+          <div class="janela-rodape">
+            <span class="mono">3 itens · R$ 2.118,00</span>
+            <span class="btn btn-primary btn-sm">Salvar lançamento</span>
           </div>
         </div>
       </div>
-      <div class="panel-caption">interface ilustrativa da plataforma integrada</div>
+      <div class="demo-legenda mono">ilustração · você sempre confere antes de salvar</div>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="wrap problem reveal">
+<!-- ───────── problema ───────── -->
+<section class="section-alt">
+  <div class="wrap problema reveal">
     <div>
       <div class="kicker">o problema</div>
       <h2 class="section-title">A planilha não avisa que o dinheiro acabou. Ela só registra depois.</h2>
-      <p class="lede">Entre pedido de material, medição de mão de obra e conta a pagar, é fácil perder o fio de quanto a obra realmente está custando — até o extrato do banco contar a verdade, semanas depois.</p>
+      <p class="lede">Nota no porta-luvas, foto no WhatsApp, planilha que cada um atualiza de um jeito. Quando alguém junta tudo, a etapa já estourou e o extrato do banco conta a verdade semanas depois.</p>
     </div>
-    <div class="problem-visual">
-      <div class="row"><span class="k">Planilha atualizada por</span><span class="v">3 pessoas diferentes</span></div>
-      <div class="row"><span class="k">Última atualização real</span><span class="v warn">12 dias atrás</span></div>
-      <div class="row"><span class="k">Pedido de material sem vínculo com orçamento</span><span class="v warn">sim</span></div>
+    <div class="problema-quadro">
+      <div class="row"><span class="k">Notas esperando para serem digitadas</span><span class="v warn">uma pilha</span></div>
+      <div class="row"><span class="k">Última atualização da planilha</span><span class="v warn">12 dias atrás</span></div>
+      <div class="row"><span class="k">Quanto já foi gasto na fundação</span><span class="v warn">"depois eu vejo"</span></div>
       <div class="row"><span class="k">Quem descobre o estouro primeiro</span><span class="v warn">o banco</span></div>
     </div>
   </div>
 </section>
 
-<section class="section-alt" id="timeline">
+<!-- ───────── como funciona ───────── -->
+<section id="como-funciona">
   <div class="wrap reveal">
-    <div class="kicker">um dia na obra</div>
-    <h2 class="section-title">O que acontece na obra fica dentro do gabaro.</h2>
-    <p class="lede">Acompanhe a linha do tempo exata de como a equipe de campo e o escritório conversam em tempo real, sem planilhas ou grupos de WhatsApp barulhentos.</p>
-    
-    <div class="timeline-visual">
-      <div class="timeline-item">
-        <div class="timeline-time mono">07:20</div>
-        <div class="timeline-node"></div>
-        <div class="timeline-desc">
-          <h4>Pedido de insumo criado</h4>
-          <p>Mestre de obras solicita 50 sacos de cimento CP-II pelo aplicativo.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-time mono">07:28</div>
-        <div class="timeline-node"></div>
-        <div class="timeline-desc">
-          <h4>Engenheiro aprovou</h4>
-          <p>Aprovação rápida no escritório com validação imediata do saldo orçamentário da etapa.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-time mono">08:30</div>
-        <div class="timeline-node"></div>
-        <div class="timeline-desc">
-          <h4>Compra realizada</h4>
-          <p>Material comprado por R$ 1.650. Nota fiscal lançada no contas a pagar, atualizando na hora o fluxo de caixa.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-time mono">14:10</div>
-        <div class="timeline-node"></div>
-        <div class="timeline-desc">
-          <h4>Equipe concluiu a tarefa</h4>
-          <p>Carga de cimento descarregada no canteiro e equipe de campo finaliza a concretagem da viga.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-time mono">14:15</div>
-        <div class="timeline-node"></div>
-        <div class="timeline-desc">
-          <h4>Fotos anexadas</h4>
-          <p>Evidência física enviada diretamente do canteiro de obras para o diário de obra digital do gabaro.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-time mono">17:40</div>
-        <div class="timeline-node"></div>
-        <div class="timeline-desc">
-          <h4>Dashboard atualizado</h4>
-          <p>Custo real e cronograma de prazos consolidados automaticamente, sem digitação de dados.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section-alt">
-  <div class="wrap">
-    <div class="pillars-head reveal">
-      <div class="kicker">como resolve</div>
-      <h2 class="section-title">O lugar onde toda a operação da sua obra acontece.</h2>
-    </div>
-    <div class="pillars reveal">
-      <div class="pillar">
+    <div class="kicker">como funciona</div>
+    <h2 class="section-title">Três passos, do canteiro ao relatório.</h2>
+    <div class="passos">
+      <div class="passo">
         <span class="num mono">01</span>
-        <h3>Financeiro</h3>
-        <ul class="pillar-list mono">
-          <li>Orçado x Realizado</li>
-          <li>Fluxo de Caixa</li>
-          <li>Contas a pagar</li>
-        </ul>
+        <h3>Fotografe ou importe a nota</h3>
+        <p>Tire foto da nota pelo celular, envie o PDF ou importe o XML que o fornecedor mandou. Nota com vários itens vira vários lançamentos de uma vez.</p>
       </div>
-      <div class="pillar">
+      <div class="passo">
         <span class="num mono">02</span>
-        <h3>Operação</h3>
-        <ul class="pillar-list mono">
-          <li>Cronograma</li>
-          <li>Timeline</li>
-          <li>Fotos da obra</li>
-        </ul>
+        <h3>Confira e classifique</h3>
+        <p>Os dados já vêm preenchidos. Você confere, escolhe a etapa da obra (Fundação, Alvenaria, Elétrica…), a subcategoria e o tipo de despesa, e salva.</p>
       </div>
-      <div class="pillar">
+      <div class="passo">
         <span class="num mono">03</span>
-        <h3>Recursos</h3>
-        <ul class="pillar-list mono">
-          <li>Materiais</li>
-          <li>Equipamentos</li>
-          <li>Anexos</li>
-        </ul>
-      </div>
-      <div class="pillar">
-        <span class="num mono">04</span>
-        <h3>Inteligência</h3>
-        <ul class="pillar-list mono">
-          <li>Dashboard</li>
-          <li>Alertas</li>
-          <li>Notificações</li>
-          <li>Calendário</li>
-        </ul>
+        <h3>Acompanhe a obra</h3>
+        <p>Orçado × realizado por etapa, fluxo de caixa e gastos por conta pagadora, atualizados na hora, para a obra toda ou uma de cada vez.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="alertas">
-  <div class="wrap reveal">
-    <div class="kicker">alertas inteligentes</div>
-    <h2 class="section-title">Prevenir estouros antes que eles aconteçam.</h2>
-    <p class="lede">O gabaro não é passivo. Ele te avisa ativamente na tela e por notificações quando ocorrem desvios de custo ou prazos.</p>
-    
-    <div class="alerts-grid">
-      <div class="alert-card critical">
-        <span class="alert-badge mono">estouro financeiro</span>
-        <h3>A fundação ultrapassou o orçamento previsto.</h3>
-        <p>Etapa de estacas e escavação ultrapassou a margem em 14% devido a desvios no valor do aço e fretes.</p>
-      </div>
-      <div class="alert-card">
-        <span class="alert-badge mono">contas a vencer</span>
-        <h3>A conta vence amanhã.</h3>
-        <p>Boleto de R$ 12.000 da distribuidora de concreto está agendado e lançado no contas a pagar de amanhã.</p>
-      </div>
-      <div class="alert-card">
-        <span class="alert-badge mono">aprovação pendente</span>
-        <h3>Existem quatro pedidos aguardando aprovação.</h3>
-        <p>Pedidos de cimento e insumos criados no canteiro pelo mestre de obras aguardam a validação da gerência.</p>
-      </div>
-      <div class="alert-card">
-        <span class="alert-badge mono">logística de ativos</span>
-        <h3>A serra elétrica está na Obra B.</h3>
-        <p>Ferramenta alocada e transferida por Carlos. O sistema mapeia o local físico dos seus equipamentos ativos.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap proof reveal">
-    <div class="proof-mark">"</div>
+<!-- ───────── IA ───────── -->
+<section class="section-alt" id="ia">
+  <div class="wrap ia reveal">
     <div>
-      <blockquote>Nascido dentro de uma obra real — não numa sala de reunião.</blockquote>
-      <p class="small">gabaro já roda hoje gerenciando o financeiro de uma obra, todos os dias. Não é protótipo de pitch: é a ferramenta que resolveu esse problema pra nós primeiro, antes de qualquer intenção de vender.</p>
+      <div class="kicker">leitura por IA</div>
+      <h2 class="section-title">Chega de digitar nota.</h2>
+      <p class="lede">A inteligência artificial lê a foto ou o PDF da nota e devolve tudo organizado. Funciona com DANFE, cupom fiscal e nota de serviço, mesmo com a foto meio torta.</p>
+      <ul class="ia-lista">
+        <li><b>Lê o que importa:</b> fornecedor, data, forma de pagamento, cada item com quantidade, valor unitário e total.</li>
+        <li><b>Você tem a palavra final:</b> nada é salvo sem você conferir. Se a IA errar um valor, é só corrigir antes de salvar.</li>
+        <li><b>A imagem não fica guardada:</b> a nota é lida e descartada. Ficam só os dados que você confirmou.</li>
+        <li><b>XML não gasta leitura:</b> nota com XML é importada direto, sem limite, em qualquer plano.</li>
+      </ul>
+    </div>
+    <div class="ia-cartao">
+      <div class="ia-cartao-topo mono">leituras de nota por IA neste mês</div>
+      <div class="ia-numero display">47 <span>de 80</span></div>
+      <div class="ia-barra"><div class="ia-barra-uso"></div></div>
+      <p class="ia-nota">Cada plano tem uma cota mensal de leituras por IA. O titular acompanha o uso na tela "Minha assinatura".</p>
     </div>
   </div>
 </section>
 
-<section class="section-alt" id="comparativo">
+<!-- ───────── recursos ───────── -->
+<section>
+  <div class="wrap reveal">
+    <div class="kicker">o que vem junto</div>
+    <h2 class="section-title">Tudo o que o escritório e o canteiro precisam para controlar o gasto.</h2>
+    <div class="recursos">
+      <div class="recurso">
+        <h3>Etapas da obra prontas</h3>
+        <p>24 categorias (de Serviços preliminares a Limpeza e entrega) com mais de 300 subcategorias, e 10 tipos de despesa. Dá para criar as suas.</p>
+      </div>
+      <div class="recurso">
+        <h3>Orçado × realizado</h3>
+        <p>Defina quanto cada etapa pode custar e veja na hora quanto já foi gasto e quanto falta.</p>
+      </div>
+      <div class="recurso">
+        <h3>Fluxo de caixa</h3>
+        <p>Entradas e saídas de cada obra no mesmo lugar, com o saldo do mês.</p>
+      </div>
+      <div class="recurso">
+        <h3>Pedidos de material</h3>
+        <p>O canteiro pede, o escritório aprova, e a compra vira lançamento com um clique.</p>
+      </div>
+      <div class="recurso">
+        <h3>Tarefas da equipe</h3>
+        <p>Distribua tarefas para os prestadores e acompanhe o andamento de cada uma.</p>
+      </div>
+      <div class="recurso">
+        <h3>Várias obras, acesso por obra</h3>
+        <p>Cada pessoa vê só as obras dela. Papéis prontos: administrador, gestor de obra, financeiro e prestador.</p>
+      </div>
+      <div class="recurso">
+        <h3>Histórico de tudo</h3>
+        <p>Quem lançou, editou ou excluiu, e quando. Nada some sem deixar rastro.</p>
+      </div>
+      <div class="recurso">
+        <h3>Sua planilha entra e sai</h3>
+        <p>Importe a planilha que você já usa (CSV ou Excel) e exporte tudo quando quiser.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── prova ───────── -->
+<section class="section-alt">
+  <div class="wrap prova reveal">
+    <div class="prova-marca" aria-hidden="true">"</div>
+    <div>
+      <blockquote>Nascido dentro de uma obra real, não numa sala de reunião.</blockquote>
+      <p class="small">O Gabaro já controla os gastos de uma obra de verdade, todos os dias. Não é protótipo: é a ferramenta que resolveu esse problema para nós primeiro, antes de virar produto.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── comparativo ───────── -->
+<section>
   <div class="wrap reveal">
     <div class="kicker">a diferença</div>
-    <h2 class="section-title">Planilha × gabaro</h2>
-    <table class="compare">
-      <thead>
-        <tr><th>&nbsp;</th><th>Planilha</th><th>gabaro</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Atualização em tempo real</td><td class="no">✗</td><td class="yes">✓</td></tr>
-        <tr><td>Pedido de material vinculado ao orçamento</td><td class="no">✗</td><td class="yes">✓</td></tr>
-        <tr><td>Alguém sempre com a versão desatualizada</td><td class="no">✓</td><td class="yes">✗</td></tr>
-        <tr><td>Acesso pelo celular, direto do canteiro</td><td class="meh">depende</td><td class="yes">✓</td></tr>
-        <tr><td>Alerta quando uma etapa estoura o orçado</td><td class="no">✗</td><td class="yes">✓</td></tr>
-      </tbody>
-    </table>
+    <h2 class="section-title">Planilha × Gabaro</h2>
+    <div class="compare-wrap">
+      <table class="compare">
+        <thead>
+          <tr><th>&nbsp;</th><th>Planilha</th><th>Gabaro</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Lançar uma nota com 10 itens</td><td class="meh">digitar linha por linha</td><td class="yes">uma foto</td></tr>
+          <tr><td>Saber quanto cada etapa já gastou</td><td class="meh">fórmula que alguém quebra</td><td class="yes">na hora</td></tr>
+          <tr><td>Todo mundo na mesma versão</td><td class="no">✗</td><td class="yes">✓</td></tr>
+          <tr><td>Cada pessoa vê só a obra dela</td><td class="no">✗</td><td class="yes">✓</td></tr>
+          <tr><td>Saber quem alterou um valor</td><td class="no">✗</td><td class="yes">✓</td></tr>
+          <tr><td>Usar pelo celular, no canteiro</td><td class="meh">depende</td><td class="yes">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
-<section id="contato">
+<!-- ───────── planos ───────── -->
+<section class="section-alt" id="planos">
+  <div class="wrap reveal">
+    <div class="kicker">planos</div>
+    <h2 class="section-title">Escolha pelo tamanho da sua equipe.</h2>
+    <p class="lede">Todos os planos têm o sistema completo, obras ilimitadas, importação de XML sem limite e garantia de 7 dias: não gostou, devolvemos o valor.</p>
+
+    <!-- PREENCHER: preços, links de checkout da Kiwify e cotas de IA definitivas -->
+    <div class="planos">
+      <div class="plano">
+        <div class="plano-nome">Individual</div>
+        <p class="plano-para">Para quem cuida sozinho da própria obra.</p>
+        <div class="plano-preco display">R$ —<span>/mês</span></div>
+        <ul class="plano-lista">
+          <li><b>1</b> pessoa</li>
+          <li><b>20</b> leituras de nota por IA por mês</li>
+          <li>Obras ilimitadas</li>
+        </ul>
+        <a href="#planos" class="btn btn-ghost">Assinar</a>
+      </div>
+      <div class="plano">
+        <div class="plano-nome">Essencial</div>
+        <p class="plano-para">Para a equipe pequena: escritório e canteiro juntos.</p>
+        <div class="plano-preco display">R$ —<span>/mês</span></div>
+        <ul class="plano-lista">
+          <li>Até <b>4</b> pessoas</li>
+          <li><b>60</b> leituras de nota por IA por mês</li>
+          <li>Pedidos de material e tarefas</li>
+        </ul>
+        <a href="#planos" class="btn btn-ghost">Assinar</a>
+      </div>
+      <div class="plano plano-destaque">
+        <div class="plano-selo mono">recomendado</div>
+        <div class="plano-nome">Profissional</div>
+        <p class="plano-para">Para a construtora com várias obras ao mesmo tempo.</p>
+        <div class="plano-preco display">R$ —<span>/mês</span></div>
+        <ul class="plano-lista">
+          <li>Até <b>8</b> pessoas</li>
+          <li><b>80</b> leituras de nota por IA por mês</li>
+          <li>Acesso por obra e papéis</li>
+        </ul>
+        <a href="#planos" class="btn btn-primary">Assinar</a>
+      </div>
+      <div class="plano">
+        <div class="plano-nome">Empresas</div>
+        <p class="plano-para">Para equipes maiores, com financeiro dedicado.</p>
+        <div class="plano-preco display">R$ —<span>/mês</span></div>
+        <ul class="plano-lista">
+          <li>Até <b>12</b> pessoas</li>
+          <li><b>120</b> leituras de nota por IA por mês</li>
+          <li>Tudo do Profissional</li>
+        </ul>
+        <a href="#planos" class="btn btn-ghost">Assinar</a>
+      </div>
+    </div>
+    <p class="planos-nota">Pessoas = todos os logins ativos, contando o titular. O pagamento é feito pela Kiwify (cartão, Pix ou boleto) e o acesso chega no seu e-mail logo depois da compra.</p>
+  </div>
+</section>
+
+<!-- ───────── segurança ───────── -->
+<section>
+  <div class="wrap reveal">
+    <div class="kicker">seus dados</div>
+    <h2 class="section-title">Os dados da sua obra são seus.</h2>
+    <div class="seguranca">
+      <div><h3>Guardados com cuidado</h3><p>Conexão criptografada, senhas fortes obrigatórias e cópia de segurança diária, também criptografada.</p></div>
+      <div><h3>Separados por empresa</h3><p>Nenhuma construtora vê os dados de outra. Dentro da sua, cada pessoa vê só as obras dela.</p></div>
+      <div><h3>Seus para levar</h3><p>Exporte tudo quando quiser. Se cancelar, você ainda consulta e exporta por 30 dias.</p></div>
+      <div><h3>LGPD</h3><p>Sem venda de dados e sem propaganda. <a href="https://app.gabaro.com.br/termos.html">Termos de uso e privacidade</a>.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── dúvidas ───────── -->
+<section class="section-alt" id="duvidas">
+  <div class="wrap reveal">
+    <div class="kicker">dúvidas</div>
+    <h2 class="section-title">Perguntas frequentes</h2>
+    <div class="faq">
+      <details>
+        <summary>Preciso instalar alguma coisa?</summary>
+        <p>Não. O Gabaro funciona no navegador do computador e do celular. É só entrar com o seu login.</p>
+      </details>
+      <details>
+        <summary>E se a IA ler algum valor errado?</summary>
+        <p>Nada é salvo sem você conferir. Os campos chegam preenchidos para você revisar; se algo estiver errado, você corrige antes de salvar.</p>
+      </details>
+      <details>
+        <summary>O que conta como uma leitura de IA?</summary>
+        <p>Cada nota enviada por foto ou PDF conta uma leitura, não importa quantos itens ela tenha. Se a leitura falhar por erro do sistema, ela não conta. Importar XML não gasta leitura.</p>
+      </details>
+      <details>
+        <summary>E se as leituras do mês acabarem?</summary>
+        <p>Você continua lançando à mão ou pelo XML normalmente. Se precisar de mais leituras com frequência, é só mudar de plano.</p>
+      </details>
+      <details>
+        <summary>Consigo trazer a planilha que eu já uso?</summary>
+        <p>Sim. Dá para importar planilhas em CSV ou Excel, e as categorias que não existirem são criadas na importação.</p>
+      </details>
+      <details>
+        <summary>Como funciona a garantia?</summary>
+        <p>Você tem 7 dias para testar. Se não gostar, pede o reembolso pela Kiwify e recebe o valor de volta.</p>
+      </details>
+      <details>
+        <summary>E se eu cancelar?</summary>
+        <p>O acesso completo continua até o fim do período pago. Depois, o sistema fica em modo somente leitura por 30 dias, para você exportar o que quiser.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── chamada final ───────── -->
+<section>
   <div class="wrap">
     <div class="cta-final reveal">
       <div>
-        <h2>Pronto para finalmente ter o controle de toda a sua operação?</h2>
-        <p class="lede">Agende uma demonstração prática de 20 minutos. Sem slides ou papo corporativo: mostramos como o gabaro funciona usando dados de obras reais.</p>
-        <span class="hero-note">Descubra como colocar sua construtora no trilho certo em menos de 10 segundos.</span>
+        <h2>A próxima nota pode ser a última que você digita.</h2>
+        <p class="lede">Escolha o plano, receba o acesso por e-mail e lance a primeira nota em poucos minutos.</p>
       </div>
-
-      <div>
-        <form id="demoForm">
-          <div class="field">
-            <label for="nome">Nome</label>
-            <input id="nome" name="nome" type="text" placeholder="Seu nome" required>
-          </div>
-          <div class="field">
-            <label for="empresa">Construtora / empresa</label>
-            <input id="empresa" name="empresa" type="text" placeholder="Nome da construtora" required>
-          </div>
-          <div class="field">
-            <label for="contato-input">E-mail ou WhatsApp</label>
-            <input id="contato-input" name="contato" type="text" placeholder="voce@empresa.com ou (00) 00000-0000" required>
-          </div>
-          <div class="field">
-            <label for="obras">Obras simultâneas</label>
-            <select id="obras" name="obras">
-              <option value="1">1 obra</option>
-              <option value="2-3">2 a 3 obras</option>
-              <option value="4+">4 ou mais</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-primary">Quero uma demonstração</button>
-        </form>
-        <div id="thanks">
-          <h3>Recebemos seu pedido.</h3>
-          <p>Vamos te chamar em breve pra combinar o melhor horário.</p>
-        </div>
+      <div class="cta-final-acoes">
+        <a href="#planos" class="btn btn-primary">Ver planos</a>
+        <p class="cta-contato">Ficou com alguma dúvida? Escreva para <a href="mailto:suporte.gabaro@gmail.com">suporte.gabaro@gmail.com</a>.</p>
       </div>
     </div>
   </div>
 </section>
 
+</main>
+
 <footer>
-  <div class="wrap">
-    <div class="foot-row">
-      <div class="logo"><span class="mark"></span>gabaro</div>
-      <span class="tag">O lugar onde toda a operação da obra acontece.</span>
+  <div class="wrap foot-row">
+    <a href="#topo" class="logo"><span class="mark"></span>Gabaro</a>
+    <div class="foot-links">
+      <a href="https://app.gabaro.com.br">Entrar no sistema</a>
+      <a href="https://app.gabaro.com.br/termos.html">Termos e privacidade</a>
+      <a href="mailto:suporte.gabaro@gmail.com">Suporte</a>
     </div>
+    <span class="tag mono">controle de gastos de obra</span>
   </div>
 </footer>
 
 <script src="script.js"></script>
-
 </body>
 </html>
