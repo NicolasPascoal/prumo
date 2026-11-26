@@ -305,6 +305,7 @@ table.compare th:not(:first-child), table.compare td:not(:first-child) { text-al
 .plano-para { color: var(--mut); font-size: 13px; margin: 6px 0 18px; min-height: 40px; }
 .plano-preco { font-size: 34px; font-weight: 600; margin-bottom: 18px; }
 .plano-preco span { font-size: 14px; color: var(--mut); font-weight: 500; }
+.plano-preco small { font-size: 16px; font-weight: 500; color: var(--mut); vertical-align: 12px; margin-right: 2px; }
 .plano-lista { list-style: none; padding: 0; margin: 0 0 24px; display: grid; gap: 10px; font-size: 14px; flex: 1; }
 .plano-lista li { padding-left: 18px; position: relative; }
 .plano-lista li::before { content: '✓'; position: absolute; left: 0; color: var(--ok); font-size: 12px; }
