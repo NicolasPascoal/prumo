@@ -144,9 +144,9 @@ h1.headline { font-size: clamp(38px, 5.2vw, 60px); letter-spacing: -0.025em; mar
 .sub { font-size: 18px; color: var(--mut); max-width: 46ch; margin-bottom: 32px; }
 .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
 .hero-selos { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 12px; color: var(--mut); }
-.hero-selos li::before { content: '✓'; color: var(--ok); margin-right: 6px; }
+.hero-selos li::before { content: ''; display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: -1px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233F6B4F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") no-repeat center / contain; }
 
-/* ilustração da nota → lançamento */
+/* ilustração: da nota ao lançamento */
 .demo {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) auto minmax(0, 1.2fr);
@@ -292,7 +292,7 @@ table.compare th:not(:first-child), table.compare td:not(:first-child) { text-al
 .plano-preco small { font-size: 16px; font-weight: 500; color: var(--mut); vertical-align: 12px; margin-right: 2px; }
 .plano-lista { list-style: none; padding: 0; margin: 0 0 24px; display: grid; gap: 10px; font-size: 14px; flex: 1; }
 .plano-lista li { padding-left: 18px; position: relative; }
-.plano-lista li::before { content: '✓'; position: absolute; left: 0; color: var(--ok); font-size: 12px; }
+.plano-lista li::before { content: ''; width: 14px; height: 14px; top: 3px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233F6B4F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") no-repeat center / contain; position: absolute; left: 0; color: var(--ok); font-size: 12px; }
 .plano .btn { width: 100%; }
 .planos-nota { margin-top: 20px; font-size: 13px; color: var(--mut); }
 
